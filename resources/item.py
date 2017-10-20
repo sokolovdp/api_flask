@@ -68,6 +68,6 @@ class ItemsRange(Resource):
             return max_requests_message(), 400
         max_stop = ItemModel.count_all_items()
         if (0 < stop <= max_stop) and (0 < start <= stop):
-            return {'from': start, 'to': stop, 'items': [item.json() for item in ItemModel.get_range_items(start - 1, stop)]}
+            return {'from': start, 'to': stop, 'items': [item.json() for item in ItemModel.get_range_items(start, stop)]}
         else:
             return {'error': 'invalid range', 'from': start, 'to': stop}

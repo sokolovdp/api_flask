@@ -34,12 +34,12 @@ class ItemModel(db.Model):
 
     @classmethod
     def get_range_items(cls, start, stop):
-        result = cls.query.all()[start:stop]
+        # result = cls.query.all()[start:stop]
+        result = db.session.query(ItemModel).filter(ItemModel.id.between(start, stop))
         return result
 
     @classmethod
     def count_all_items(cls):
         # count = len(cls.query.all())
-        count = db.session.query(func.count(ItemModel.id)).scalar()
-        return count
-
+        number_of_records = db.session.query(func.count(ItemModel.id)).scalar()
+        return number_of_records
