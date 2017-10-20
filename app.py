@@ -15,10 +15,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 #                                                       'postgresql://postgres:politruk@localhost:5432/api_data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'sokolov'
+
 api = Api(app)
-
-jwt = JWT(app, authentication_handler=authenticate, identity_handler=identity)  # /auth -
-
+jwt = JWT(app, authentication_handler=authenticate, identity_handler=identity)  # /auth - route handler
 api.add_resource(Item, '/items/<string:item_name>')
 api.add_resource(ItemsAmount, '/items')
 api.add_resource(ItemsRange, '/items/<int:start>/<int:stop>')
